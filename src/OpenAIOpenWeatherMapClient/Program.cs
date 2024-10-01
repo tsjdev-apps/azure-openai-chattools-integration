@@ -98,6 +98,8 @@ ChatCompletionOptions options = new()
 
 while (true)
 {
+    conversationMessages.Clear();
+
     // Get user input
     ConsoleHelper.WriteToConsole("[green]User:[/]");
     string? prompt = Console.ReadLine();
@@ -120,7 +122,7 @@ while (true)
     // Handle different completion reasons
     if (completion.Value?.FinishReason == ChatFinishReason.Stop)
     {
-        ConsoleHelper.WriteToConsole(completion.Value.ToString());
+        ConsoleHelper.WriteToConsole(completion.Value.Content[0].Text);
     }
     else if (completion.Value?.FinishReason == ChatFinishReason.ToolCalls)
     {
